@@ -53,6 +53,7 @@ const uint8_t thisCommit[6] = {LATEST_COMMIT};
 
 /// define some libs to use ///
 hwTimer hwTimer;
+GENERIC_CRC8 ota_crc(ELRS_CRC_POLY);
 CRSF crsf;
 POWERMGNT POWERMGNT;
 MSP msp;
@@ -99,7 +100,7 @@ uint8_t baseMac[6];
 
 void ICACHE_RAM_ATTR ProcessTLMpacket()
 {
-  uint8_t calculatedCRC = CalcCRC(Radio.RXdataBuffer, 7) + CRCCaesarCipher;
+  uint8_t calculatedCRC = ota_crc.calc(Radio.RXdataBuffer, 7) + CRCCaesarCipher;
   uint8_t inCRC = Radio.RXdataBuffer[7];
   uint8_t type = Radio.RXdataBuffer[0] & TLM_PACKET;
   uint8_t packetAddr = (Radio.RXdataBuffer[0] & 0b11111100) >> 2;
@@ -356,7 +357,7 @@ void ICACHE_RAM_ATTR SendRCdataToRF()
   }
 
   ///// Next, Calculate the CRC and put it into the buffer /////
-  uint8_t crc = CalcCRC(Radio.TXdataBuffer, 7) + CRCCaesarCipher;
+  uint8_t crc = ota_crc.calc(Radio.TXdataBuffer, 7) + CRCCaesarCipher;
   Radio.TXdataBuffer[7] = crc;
   Radio.TXnb(Radio.TXdataBuffer, 8);
 }
@@ -419,15 +420,23 @@ void HandleUpdateParameter()
     break;
 
   case 1:
-    Serial.println("Change Link rate");
     if ((ExpressLRS_currAirRate_Modparams->index != enumRatetoIndex((expresslrs_RFrates_e)crsf.ParameterUpdateData[1])))
     {
-      if ((micros() + PacketLastSentMicros) > ExpressLRS_currAirRate_Modparams->interval) // special case, if we haven't waited long enough to ensure that the last packet hasn't been sent we exit.
+      if ((micros() - PacketLastSentMicros) > ExpressLRS_currAirRate_Modparams->interval) // special case, if we haven't waited long enough to ensure that the last packet hasn't been sent we exit.
       {
+        Serial.println("Change Link rate");
         SetRFLinkRate(enumRatetoIndex((expresslrs_RFrates_e)crsf.ParameterUpdateData[1]));
         Serial.println(ExpressLRS_currAirRate_Modparams->enum_rate);
-        hwTimer.resume();
+
+        //Commenting out this reduces the "UART CRC failure" debug messages
+        //hwTimer.resume(); 
       }
+      else
+      {
+         //Serial.println("Change Link rate postponed");
+         return; //try again later
+      }
+      
     }
     break;
 
