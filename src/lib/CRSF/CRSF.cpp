@@ -504,7 +504,7 @@ void ICACHE_RAM_ATTR CRSF::sendSyncPacketToTX(void *pvParameters) // in values i
 
                         if (UARTcurrentBaud == CRSF_OPENTX_FAST_BAUDRATE)
                         {
-                            UARTrequestedBaud = CRSF_OPENTX_SLOW_BAUDRATE;
+                            //UARTrequestedBaud = CRSF_OPENTX_SLOW_BAUDRATE;
                         }
                         else if (UARTcurrentBaud == CRSF_OPENTX_SLOW_BAUDRATE)
                         {

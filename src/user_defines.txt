@@ -10,13 +10,13 @@
 
 ### BINDING PHRASE: ### 
 
--DMY_BINDING_PHRASE="default ExpressLRS binding phrase"
+-DMY_BINDING_PHRASE="Uparjen zrakomlat Crni Bombarder"
 
 
 ### REGULATORY DOMAIN: ### 
 
 #-DRegulatory_Domain_AU_915
-#-DRegulatory_Domain_EU_868
+-DRegulatory_Domain_EU_868
 #-DRegulatory_Domain_AU_433
 #-DRegulatory_Domain_EU_433
 #-DRegulatory_Domain_FCC_915
@@ -25,7 +25,7 @@
 
 ### SWITCHES: ### 
 
-#-DHYBRID_SWITCHES_8
+-DHYBRID_SWITCHES_8
 
 
 ### PERFORMANCE OPTIONS: ### 
@@ -33,7 +33,7 @@
 #-DNO_SYNC_ON_ARM
 #-DARM_CHANNEL=AUX1
 
--DFEATURE_OPENTX_SYNC
+#-DFEATURE_OPENTX_SYNC
 #-DFEATURE_OPENTX_SYNC_AUTOTUNE
 
 #-DLOCK_ON_FIRST_CONNECTION
@@ -42,7 +42,7 @@
 
 ### COMPATIBILITY OPTIONS: ###
  
--DUART_INVERTED
+#-DUART_INVERTED
 
 #-DUSE_R9MM_R9MINI_SBUS
 
@@ -53,6 +53,6 @@
 
 #-DUSE_ESP8266_BACKPACK
 
-#-DJUST_BEEP_ONCE
+-DJUST_BEEP_ONCE
 
 #-DUSE_500HZ
