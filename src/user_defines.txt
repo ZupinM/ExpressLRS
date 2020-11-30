@@ -10,13 +10,13 @@
 
 ### BINDING PHRASE: ### 
 
--DMY_BINDING_PHRASE="Uparjen zrakomlat Crni Bombarder"
+-DMY_BINDING_PHRASE="default ExpressLRS binding phrase"
 
 
 ### REGULATORY DOMAIN: ### 
 
 #-DRegulatory_Domain_AU_915
--DRegulatory_Domain_EU_868
+#-DRegulatory_Domain_EU_868
 #-DRegulatory_Domain_AU_433
 #-DRegulatory_Domain_EU_433
 #-DRegulatory_Domain_FCC_915
@@ -25,18 +25,18 @@
 
 ### SWITCHES: ### 
 
--DHYBRID_SWITCHES_8
+#-DHYBRID_SWITCHES_8
 
 
 ### PERFORMANCE OPTIONS: ### 
 
 #unlocks >250mw output power for R9M (Fan mod suggested: https://github.com/AlessandroAU/ExpressLRS/wiki/R9M-Fan-Mod-Cover)
--DR9M_UNLOCK_HIGHER_POWER
+#-DR9M_UNLOCK_HIGHER_POWER
 
 #-DNO_SYNC_ON_ARM
 #-DARM_CHANNEL=AUX1
 
-#-DFEATURE_OPENTX_SYNC
+-DFEATURE_OPENTX_SYNC
 #-DFEATURE_OPENTX_SYNC_AUTOTUNE
 
 #-DLOCK_ON_FIRST_CONNECTION
@@ -45,7 +45,7 @@
 
 ### COMPATIBILITY OPTIONS: ###
  
-#-DUART_INVERTED
+-DUART_INVERTED
 
 -DUSE_R9MM_R9MINI_SBUS
 
@@ -57,5 +57,6 @@
 #-DUSE_ESP8266_BACKPACK
 
 -DJUST_BEEP_ONCE
+#-DMY_STARTUP_MELODY="B5 16 P16 B5 16 P16 B5 16 P16 B5 2 G5 2 A5 2 B5 8 P4 A5 8 B5 1|140|-3"
 
 #-DUSE_500HZ

@@ -187,6 +187,7 @@ https://github.com/jaxxzer
 #define GPIO_PIN_BUZZER         PB1
 #define GPIO_PIN_DIP1           PA12 // dip switch 1
 #define GPIO_PIN_DIP2           PA11 // dip switch 2
+//#define GPIO_PIN_FAN_EN         PAX // TBD
 
 #define GPIO_PIN_DEBUG_RX    PA10 // confirmed
 #define GPIO_PIN_DEBUG_TX    PA9 // confirmed
@@ -225,29 +226,35 @@ https://github.com/jaxxzer
 #endif
 
 #ifdef TARGET_R9M_LITE_PRO_TX
+//#define GPIO_PIN_RFamp_APC1           PA4  //2.7V
+//#define GPIO_PIN_RFamp_APC2           PA5  //100mW@590mV, 200mW@870mV, 500mW@1.093V, 1W@1.493V
+#define GPIO_PIN_RFswitch_CONTROL     PA6  // confirmed  //HIGH = RX, LOW = TX
 
-#define GPIO_PIN_RFswitch_CONTROL     PC13  // need to confirm  //HIGH = RX, LOW = TX
-
-#define GPIO_PIN_NSS            PB12
-#define GPIO_PIN_DIO0           PC15
-#define GPIO_PIN_DIO1           -1 // NOT USED ON THIS TARGET
-#define GPIO_PIN_BUSY           -1 // NOT USED ON THIS TARGET
+#define GPIO_PIN_NSS            PB12 // confirmed
+#define GPIO_PIN_DIO0           PA8  // confirmed
+#define GPIO_PIN_DIO1           UNDEF_PIN   // NOT USED ON THIS TARGET
+#define GPIO_PIN_BUSY           UNDEF_PIN   // NOT USED ON THIS TARGET
 #define GPIO_PIN_MOSI           PB15
 #define GPIO_PIN_MISO           PB14
 #define GPIO_PIN_SCK            PB13
-#define GPIO_PIN_RST            PC14
-#define GPIO_PIN_RX_ENABLE      PC13 //PB3 // need to confirm
+#define GPIO_PIN_RST            PA9  // NRESET
+#define GPIO_PIN_RX_ENABLE      PC13 // need to confirm
 #define GPIO_PIN_SDA            PB7
 #define GPIO_PIN_SCL            PB6
 #define GPIO_PIN_RCSIGNAL_RX    PB11 // not yet confirmed
 #define GPIO_PIN_RCSIGNAL_TX    PB10 // not yet confirmed
-#define GPIO_PIN_LED_RED        PA1 // Red LED // not yet confirmed
-#define GPIO_PIN_LED_GREEN      PA4 // Green LED // not yet confirmed
+#define GPIO_PIN_LED_GREEN      PA15 // Green LED
+#define GPIO_PIN_LED_RED        PB3  // Red LED
+#define GPIO_PIN_LED_RED        PB4  // Blue LED
 
-#define GPIO_PIN_DEBUG_RX    PA3 // confirmed
-#define GPIO_PIN_DEBUG_TX    PA2 // confirmed
+#define GPIO_PIN_DEBUG_RX    	PA3  // not yet confirmed
+#define GPIO_PIN_DEBUG_TX    	PA2  // not yet confirmed
 
-#define BUFFER_OE               PA5  //CONFIRMED
+#define GPIO_PIN_VRF1			PA7  // 26SU Sample RF1
+#define GPIO_PIN_VRF2			PB1  // 26SU Sample RF2
+#define GPIO_PIN_SWR			PA0  // SWR? ADC1_IN1
+
+#define BUFFER_OE               UNDEF_PIN  //CONFIRMED
 
 #endif
 
@@ -280,6 +287,26 @@ https://github.com/jaxxzer
 #define GPIO_PIN_RCSIGNAL_TX 13
 #endif
 
+#ifdef TARGET_RX_GHOST_ATTO_V1
+#define GPIO_PIN_NSS            PA15
+#define GPIO_PIN_BUSY           PA3
+#define GPIO_PIN_DIO0           -1 // does not exist on sx1280
+#define GPIO_PIN_DIO1           PA1
+#define GPIO_PIN_MOSI           PB5
+#define GPIO_PIN_MISO           PB4
+#define GPIO_PIN_SCK            PB3
+#define GPIO_PIN_RST            PB0
+//#define GPIO_PIN_RCSIGNAL_RX    PB7
+//#define GPIO_PIN_RCSIGNAL_TX    PB6
+#define GPIO_PIN_RCSIGNAL_RX    PB6 // USART1, half duplex
+#define GPIO_PIN_RCSIGNAL_TX    PA2 // USART2, half duplex
+//#define GPIO_PIN_LED            PA7
+#define GPIO_PIN_LED_WS2812      PA7
+#define GPIO_PIN_LED_WS2812_FAST PA_7
+//#define GPIO_PIN_BUTTON         PA12
+#define timerOffset             1
+#endif
+
 #if defined(TARGET_TX_ESP32_E28_SX1280_V1) || defined(TARGET_TX_ESP32_LORA1280F27)
 #define GPIO_PIN_NSS 5
 #define GPIO_PIN_BUSY 21
@@ -295,4 +322,13 @@ https://github.com/jaxxzer
 #define GPIO_PIN_OLED_SCK -1
 #define GPIO_PIN_RCSIGNAL_RX 13
 #define GPIO_PIN_RCSIGNAL_TX 13
+#endif
+
+#ifdef GPIO_PIN_LED_WS2812
+#ifndef GPIO_PIN_LED_WS2812_FAST
+#error "WS2812 support requires _FAST pin!"
+#endif
+#else
+#define GPIO_PIN_LED_WS2812         UNDEF_PIN
+#define GPIO_PIN_LED_WS2812_FAST    UNDEF_PIN
 #endif
