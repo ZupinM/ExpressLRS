@@ -517,9 +517,82 @@ void HandleUpdateParameter()
   }
 }
 
+uint8_t UpShiftCnt;
+uint8_t DownShiftCnt;
+PowerLevels_e CurrentPower;
+bool StopBeeping = false;
+
+void DynamicPowerSwitch(void){
+
+  if(crsf.LinkStatistics.uplink_Link_quality < 100)
+  {
+    if(crsf.LinkStatistics.uplink_Link_quality < 95)
+    {
+      UpShiftCnt += 5;
+    }else
+    {
+      UpShiftCnt++;
+    }
+    DownShiftCnt = 0;
+  }
+  else if(crsf.LinkStatistics.uplink_Link_quality == 100)
+  {
+    DownShiftCnt++;
+    UpShiftCnt = 0;
+  }
+  else
+  {
+    DownShiftCnt = 0; //within acceptable LQ
+    UpShiftCnt = 0;
+  }
+
+  uint8_t tlmRatio = TLMratioEnumToValue( ExpressLRS_currAirRate_Modparams->TLMinterval);
+ 
+
+  if(UpShiftCnt > (4 * 128 / tlmRatio))
+  {
+    if(CurrentPower == (PowerLevels_e)MaxPower){
+      tone(GPIO_PIN_BUZZER, 700, 150);
+    }
+    else
+    {
+      CurrentPower = POWERMGNT.incPower();
+      tone(GPIO_PIN_BUZZER, 700, 50);
+    }
+    DownShiftCnt = 0;
+    UpShiftCnt = 0;  
+    StopBeeping = false;
+  }
+
+  if(DownShiftCnt > (10 * 128 / tlmRatio) )
+  {
+    if((uint8_t)CurrentPower == 0) //minimum power reached
+    {
+      if(StopBeeping == false){ //latch to only indicate min power once
+        tone(GPIO_PIN_BUZZER, 200, 150);
+        StopBeeping = true;
+      }
+    }
+    else
+    {
+      CurrentPower = POWERMGNT.decPower();
+      tone(GPIO_PIN_BUZZER, 200, 50);  
+    }
+    DownShiftCnt = 0;
+    UpShiftCnt = 0;  
+  }
+
+  if(connectionState == disconnected && crsf.LinkStatistics.downlink_Link_quality < 60){ //Telemetry lost when downlink was weak
+      POWERMGNT.setPower((PowerLevels_e)MaxPower);
+      tone(GPIO_PIN_BUZZER, 700, 150);
+  }
+
+}
+
 void ICACHE_RAM_ATTR RXdoneISR()
 {
   ProcessTLMpacket();
+  DynamicPowerSwitch();
 }
 
 void ICACHE_RAM_ATTR TXdoneISR()

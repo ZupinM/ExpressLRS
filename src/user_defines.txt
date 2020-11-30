@@ -31,7 +31,7 @@
 ### PERFORMANCE OPTIONS: ### 
 
 #unlocks >250mw output power for R9M (Fan mod suggested: https://github.com/AlessandroAU/ExpressLRS/wiki/R9M-Fan-Mod-Cover)
-#-DR9M_UNLOCK_HIGHER_POWER
+-DR9M_UNLOCK_HIGHER_POWER
 
 #-DNO_SYNC_ON_ARM
 #-DARM_CHANNEL=AUX1
@@ -47,7 +47,7 @@
  
 #-DUART_INVERTED
 
-#-DUSE_R9MM_R9MINI_SBUS
+-DUSE_R9MM_R9MINI_SBUS
 
 
 ### OTHER OPTIONS: ###
