@@ -1,0 +1,9 @@
+diff a/src/user_defines.txt b/src/user_defines.txt	(rejected hunks)
+@@ -46,7 +46,6 @@
+ 
+ -DUART_INVERTED
+ 
+--DUSE_R9MM_R9MINI_SBUS
+ #-DUSE_R9MM_R9MINI_SBUS
+ 
+ #-DTLM_REPORT_INTERVAL_MS=320LU

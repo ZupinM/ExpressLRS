@@ -11,13 +11,13 @@
 ### BINDING PHRASE: ###
 # Uncomment the line below to use a hardcoded binding phrase
 # Leave commented to use traditional binding
-#-DMY_BINDING_PHRASE="default ExpressLRS binding phrase"
+-DMY_BINDING_PHRASE="Uparjen zrakomlat Crni Bombarder"
 
 
 ### REGULATORY DOMAIN: ###
 
 #-DRegulatory_Domain_AU_915
-#-DRegulatory_Domain_EU_868
+-DRegulatory_Domain_EU_868
 #-DRegulatory_Domain_AU_433
 #-DRegulatory_Domain_EU_433
 #-DRegulatory_Domain_FCC_915
@@ -31,8 +31,9 @@
 
 ### PERFORMANCE OPTIONS: ###
 
+-DDYNAMIC_POWER
 #unlocks >250mw output power for R9M and Happy Model ES915TX (Fan mod suggested: https://github.com/AlessandroAU/ExpressLRS/wiki/R9M-Fan-Mod-Cover)
-#-DUNLOCK_HIGHER_POWER
+-DUNLOCK_HIGHER_POWER
 
 #-DNO_SYNC_ON_ARM
 
@@ -45,6 +46,7 @@
 
 -DUART_INVERTED
 
+-DUSE_R9MM_R9MINI_SBUS
 #-DUSE_R9MM_R9MINI_SBUS
 
 #-DTLM_REPORT_INTERVAL_MS=320LU
@@ -53,6 +55,7 @@
 
 -DAUTO_WIFI_ON_INTERVAL=30
 
+-DJUST_BEEP_ONCE
 #-DJUST_BEEP_ONCE
 #-DDISABLE_STARTUP_BEEP
 #-DMY_STARTUP_MELODY="B5 16 P16 B5 16 P16 B5 16 P16 B5 2 G5 2 A5 2 B5 8 P4 A5 8 B5 1|140|-3"
