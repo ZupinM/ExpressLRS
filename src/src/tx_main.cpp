@@ -516,6 +516,7 @@ void HandleUpdateParameter()
   }
 }
 
+#ifdef DYNAMIC_POWER
 uint8_t UpShiftCnt;
 uint8_t DownShiftCnt;
 PowerLevels_e CurrentPower;
@@ -588,10 +589,23 @@ void DynamicPowerSwitch(void){
 
 }
 
+#endif
+
+void DynamicRateSwitch(void){
+
+  if(crsf.LinkStatistics.downlink_Link_quality < 60)
+  {
+    
+  }
+
+}
+
 void ICACHE_RAM_ATTR RXdoneISR()
 {
   ProcessTLMpacket();
+#ifdef DYNAMIC_POWER
   DynamicPowerSwitch();
+#endif
 }
 
 void ICACHE_RAM_ATTR TXdoneISR()
