@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Arduino.h"
+//#include "Arduino.h"
 #include "targets.h"
 #include "DAC.h"
 
@@ -10,17 +10,11 @@
 #include "SX1280Driver.h"
 #endif
 
-<<<<<<< HEAD
-#ifdef TARGET_R9M_TX
-#ifdef R9M_UNLOCK_HIGHER_POWER
-#define MaxPower 7
-=======
 #if defined(TARGET_1000mW_MODULE) || \
     defined(TARGET_R9M_TX)        || \
     defined(TARGET_TX_ES915TX)
 #ifdef UNLOCK_HIGHER_POWER
-#define MaxPower PWR_1000mW
->>>>>>> origin/master
+#define MaxPower PWR_2000mW
 #else
 #define MaxPower PWR_250mW
 #endif
