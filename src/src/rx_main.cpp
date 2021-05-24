@@ -32,8 +32,8 @@ SX1280Driver Radio;
 #include "msptypes.h"
 #include "hwTimer.h"
 #include "PFD.h"
-//#include "LQCALC.h"
-//#include "elrs_eeprom.h"
+#include "LQCALC.h"
+#include "elrs_eeprom.h"
 #include "config.h"
 #include "POWERMGNT.h"
 

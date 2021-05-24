@@ -10,13 +10,14 @@ SX1280Driver Radio;
 #endif
 
 #include "CRSF.h"
+#include "FHSS.h"
 #include "LED.h"
 // #include "debug.h"
 #include "POWERMGNT.h"
 #include "msp.h"
 #include "msptypes.h"
 #include <OTA.h>
-//#include "elrs_eeprom.h"
+#include "elrs_eeprom.h"
 #include "config.h"
 #include "hwTimer.h"
 #include "LQCALC.h"
