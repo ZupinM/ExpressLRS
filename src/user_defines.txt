@@ -31,9 +31,9 @@
 
 ### PERFORMANCE OPTIONS: ###
 
-#-DDYNAMIC_POWER
 #unlocks >250mw output power for R9M and Happy Model ES915TX (Fan mod suggested: https://github.com/AlessandroAU/ExpressLRS/wiki/R9M-Fan-Mod-Cover)
 -DUNLOCK_HIGHER_POWER
+-DDYNAMIC_POWER
 
 #-DNO_SYNC_ON_ARM
 
@@ -44,7 +44,7 @@
 
 ### COMPATIBILITY OPTIONS: ###
 
-#-DUART_INVERTED
+-DUART_INVERTED
 
 -DUSE_R9MM_R9MINI_SBUS
 
