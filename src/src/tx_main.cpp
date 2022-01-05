@@ -169,6 +169,7 @@ void DynamicPower_Update()
   {
     POWERMGNT.setPower((PowerLevels_e)config.GetPower());
     // POWERMGNT.setPower((PowerLevels_e)MaxPower);    // if you want to make the power to the aboslute maximum of a module, use this line.
+    tone(GPIO_PIN_BUZZER, 700, 150);
     return;
   }
 
@@ -189,6 +190,7 @@ void DynamicPower_Update()
       // restart the rssi sampling after a boost up
       dynamic_power_rssi_sum = 0;
       dynamic_power_rssi_n = 0;
+      tone(GPIO_PIN_BUZZER, 700, 150);
   }
   // Moving average calculation, multiplied by 2^16 for avoiding (costly) floating point operation, while maintaining some fraction parts.
   dynamic_power_avg_lq = ((int32_t)(DYNAMIC_POWER_MOVING_AVG_K - 1) * dynamic_power_avg_lq + (lq_current<<16)) / DYNAMIC_POWER_MOVING_AVG_K;

@@ -42,11 +42,20 @@ PowerLevels_e POWERMGNT::FanEnableThreshold = PWR_250mW;
 static int16_t powerValues[] = POWER_OUTPUT_VALUES;
 #endif
 
+bool beep_max_power_once;
+
 PowerLevels_e POWERMGNT::incPower()
 {
     if (CurrentPower < MaxPower)
     {
         setPower((PowerLevels_e)((uint8_t)CurrentPower + 1));
+        tone(GPIO_PIN_BUZZER, 700, 50);
+        beep_max_power_once = 0;
+    }
+    else if(!beep_max_power_once)
+    {
+        tone(GPIO_PIN_BUZZER, 700, 150);
+        beep_max_power_once = 1;
     }
     return CurrentPower;
 }
@@ -56,6 +65,13 @@ PowerLevels_e POWERMGNT::decPower()
     if (CurrentPower > MinPower)
     {
         setPower((PowerLevels_e)((uint8_t)CurrentPower - 1));
+        tone(GPIO_PIN_BUZZER, 200, 50);
+        beep_max_power_once = 0;
+    }
+    else if(!beep_max_power_once)
+    {
+        tone(GPIO_PIN_BUZZER, 200, 150);
+        beep_max_power_once = 1;
     }
     return CurrentPower;
 }
